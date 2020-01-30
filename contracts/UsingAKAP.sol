@@ -102,4 +102,20 @@ contract UsingAKAP {
         // Store the updated counter on node
         akap.setNodeBody(node, counter);
     }
+
+    // Nodes need to be reclaimed at least once a year if you want to keep ownership.
+    // It's often helpful to add a reclaim function on a contract to help facilitate this.
+
+    // Simply call the below function once before the expiry to update the expiry field.
+
+    // Because child nodes can't be claimed by others if we maintain ownership of the parent,
+    // there is no need to reclaim the two value nodes under our contract node.
+
+    function reclaim() public {
+        IAKAP akap = IAKAP(akapAddress);
+        uint parent = 0;
+
+        // You reclaim just like you claim initially
+        require(akap.claim(parent, abi.encode(address(this))) > 0, "Unable to claim node");
+    }
 }

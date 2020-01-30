@@ -80,4 +80,21 @@ contract("When executing our contract, it:", async accounts => {
         let counter2 = await getAkapNodeValue(akapInstance, node);
         assert.equal(2, counter2);
     });
+
+    it("should be easy to reclaim our contract node", async () => {
+        let usingAkapInstance = await usingAkap.deployed();
+
+        let akapAddress = await usingAkapInstance.akapAddress();
+        let node = await usingAkapInstance.node();
+
+        let akapInstance = await akap.at(akapAddress);
+
+        let existingExpiry = await akapInstance.expiryOf(node);
+
+        await usingAkapInstance.reclaim();
+
+        // After calling reclaim the expiry of node should be
+        // further into the future than it was previously.
+        assert.isTrue(await akapInstance.expiryOf(node) > existingExpiry);
+    })
 });
