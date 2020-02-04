@@ -2,7 +2,7 @@ const usingAkap = artifacts.require("UsingAKAP");
 
 function akapAddress(network) {
     let officialAddress = "0xaacCAAB0E85b1EfCEcdBA88F4399fa6CAb402349";
-    let testNetworkAddress = "REPLACE ME WITH YOUR TEST NET AKAP ADDRESS";
+    let testNetworkAddress = "REPLACE ME WITH YOUR TESTNET AKAP ADDRESS";
 
     switch(network) {
         case "goerli": return officialAddress;
