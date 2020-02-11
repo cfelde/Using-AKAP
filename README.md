@@ -1,36 +1,18 @@
-Using AKAP
-==========
+# Using AKAP, examples
 
-This repository contains a simple example on how to make use
-of the [AKAP](https://akap.me) contract.
+The [AKA protocol](https://akap.me) (AKAP) is an idea, a specification, and a set of smart contracts written for the Ethereum blockchain. It tackles a challenge seen on blockchains related to immutability and how you write code to handle such an environment.
 
-The primary purpose is to show you how to get started with your own use
-of the AKAP contract.
+In short the challenge facing blockchain developers is that when they deploy code others depend on, there's no easy upgrade path. The location of the code is tied in with the location of storage, and if you want to upgrade your code you can't easily take this storage with you. Deploying a new version would force everyone who depend on it to change their references, not to mention the pain of repopulating existing data.
 
-Step 1:
+Eternal storage is a pattern that AKAP can help you leverage, where the idea is to keep your storage separate from your code.
 
-You will want to install the AKAP contract and its dependencies.
+Please see the [documentation](https://akap.me/docs) for more in depth material.
 
-`npm install akap`
+## Repositories
 
-Step 2:
+This repository contains example usage of the AKA protocol. Other related repositories:
 
-Follow the example contract `UsingAKAP.sol` to see how AKAP can be used.
-This is not a comprehensive example of everything you can do with AKAP,
-but it shows you how to get started.
-
-Step 3:
-
-Use `truffle` to build, deploy and test. When deploying to major test
-networks and mainnet, you can use the official AKAP contract address:
-
-`0xaacCAAB0E85b1EfCEcdBA88F4399fa6CAb402349`
-
-However, when deploying to your own local test network, you will first
-need to clone and deploy the AKAP contract from https://github.com/cfelde/AKAP.
-
-After you have deployed this locally, take the address of the deployed AKAP
-contract on your local test network and put this into the `testNetworkAddress`
-variable within `2_deploy_contracts.js`.
-
-You're then good to run the tests..
+[AKAP](https://github.com/cfelde/AKAP) <br/>
+[AKAP utils](https://github.com/cfelde/AKAP-utils) <br/>
+[AKAP docs](https://github.com/cfelde/AKAP-docs) <br/>
+[AKAP browser](https://github.com/cfelde/AKAP-browser) <br/>

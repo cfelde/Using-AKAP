@@ -13,7 +13,7 @@
 // limitations under the License.
 
 const akap = artifacts.require("IAKAP");
-const usingAkap = artifacts.require("UsingAKAP");
+const exampleZero = artifacts.require("ExampleZero");
 
 async function getAkapNodeValue(akapInstance, node) {
     return await akapInstance.nodeBody(node);
@@ -32,10 +32,10 @@ async function getAkapChildValue(akapInstance, node, key) {
 
 contract("When executing our contract, it:", async accounts => {
     it("should be possible to write what the contract reads using AKAP", async () => {
-        let usingAkapInstance = await usingAkap.deployed();
+        let exampleInstance = await exampleZero.deployed();
 
-        let akapAddress = await usingAkapInstance.akapAddress();
-        let node = await usingAkapInstance.node();
+        let akapAddress = await exampleInstance.akapAddress();
+        let node = await exampleInstance.node();
 
         let akapInstance = await akap.at(akapAddress);
 
@@ -53,45 +53,45 @@ contract("When executing our contract, it:", async accounts => {
 
         // Next we're going to read these back from our contract..
         // The contract in turn reads them from AKAP
-        let value1B = web3.utils.hexToUtf8(await usingAkapInstance.getValue1());
-        let value2B = web3.utils.toBN(await usingAkapInstance.getValue2()).toNumber();
+        let value1B = web3.utils.hexToUtf8(await exampleInstance.getValue1());
+        let value2B = web3.utils.toBN(await exampleInstance.getValue2()).toNumber();
 
         assert.equal(value1A, value1B);
         assert.equal(value2A, value2B);
     });
 
     it("should be possible to read what the contract writes using AKAP", async () => {
-        let usingAkapInstance = await usingAkap.deployed();
+        let exampleInstance = await exampleZero.deployed();
 
-        let akapAddress = await usingAkapInstance.akapAddress();
-        let node = await usingAkapInstance.node();
+        let akapAddress = await exampleInstance.akapAddress();
+        let node = await exampleInstance.node();
 
         let akapInstance = await akap.at(akapAddress);
 
         // First call, will set node body to 1
-        await usingAkapInstance.increaseCounter();
+        await exampleInstance.increaseCounter();
 
         let counter1 = await getAkapNodeValue(akapInstance, node);
         assert.equal(1, counter1);
 
         // Second call, will increase node body to 2
-        await usingAkapInstance.increaseCounter();
+        await exampleInstance.increaseCounter();
 
         let counter2 = await getAkapNodeValue(akapInstance, node);
         assert.equal(2, counter2);
     });
 
     it("should be easy to reclaim our contract node", async () => {
-        let usingAkapInstance = await usingAkap.deployed();
+        let exampleInstance = await exampleZero.deployed();
 
-        let akapAddress = await usingAkapInstance.akapAddress();
-        let node = await usingAkapInstance.node();
+        let akapAddress = await exampleInstance.akapAddress();
+        let node = await exampleInstance.node();
 
         let akapInstance = await akap.at(akapAddress);
 
         let existingExpiry = await akapInstance.expiryOf(node);
 
-        await usingAkapInstance.reclaim();
+        await exampleInstance.reclaim();
 
         // After calling reclaim the expiry of node should be
         // further into the future than it was previously.

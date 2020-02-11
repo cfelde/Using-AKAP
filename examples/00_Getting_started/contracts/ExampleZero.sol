@@ -17,7 +17,7 @@ pragma solidity ^0.5.0;
 import "akap/contracts/IAKAP.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-contract UsingAKAP {
+contract ExampleZero {
     address public akapAddress;
     uint public node;
 
@@ -30,11 +30,8 @@ contract UsingAKAP {
         // Claim a new node using this contracts address as a random seed.
         // The node will use the root node at id 0 as it's parent.
         uint parent = 0;
-        node = akap.hashOf(parent, abi.encode(address(this)));
         require(akap.claim(parent, abi.encode(address(this))) > 0, "Unable to claim node");
-
-        // Store this contract address on node
-        akap.setSeeAddress(node, address(this));
+        node = akap.hashOf(parent, abi.encode(address(this)));
 
         // Approve msg.sender as operator on the node, so that
         // the contract creator can operate on the node. We will use
