@@ -16,7 +16,7 @@ You will want to install the AKAP contract and its dependencies.
 
 `npm install akap`
 
-While this example does not, later examples will also need AKAP-utils.
+While this example does not, later examples will also need AKAP utils.
 
 `npm install akap-utils`
 
